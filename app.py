@@ -363,22 +363,26 @@ if st.button("Generate Plan "):
         """
             response = model.generate_content(prompt)
             result = response.text
-            
+   
             st.markdown("## Travel Plan")
             st.markdown(result)
 
             pdf = FPDF()
             pdf.add_page()
-            pdf.set_font("Times", size=11)
+            
+            pdf.set_font("Helvetica", size=11)
 
-            clean_result = result.replace("₹", "Rs.")
-            clean_result = clean_result.replace("✈️", "")
-            clean_result = clean_result.replace("🌍", "")
+            clean_result = result.replace("₹", "Rs. ")
+            clean_result = clean_result.replace("•", "- ")
+            clean_result = clean_result.replace("“", '"').replace("”", '"').replace("‘", "'").replace("’", "'")
+            clean_result = clean_result.replace("–", "-").replace("—", "-")
+            
             clean_result = clean_result.replace("##", "")
             clean_result = clean_result.replace("**", "")
 
             for line in clean_result.split("\n"):
-                pdf.multi_cell(0, 7, line)
+                safe_line = line.encode('latin-1', 'replace').decode('latin-1')
+                pdf.multi_cell(0, 7, safe_line)
 
             pdf_bytes = pdf.output(dest="S").encode("latin-1")
 
