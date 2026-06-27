@@ -1,6 +1,5 @@
 # AI Travel Planner
 
-**Live Demo:** https://aicte-batch1-ai-travel-planner-hgn8qy6tvlcmimusp2jzpn.streamlit.app <br>
 An AI-powered travel planner built with **Streamlit** and **Google Gemini AI** that generates personalized travel itineraries based on user preferences like budget, destination, travel dates, interests, and transport mode.
 
 ## Problem Statement
